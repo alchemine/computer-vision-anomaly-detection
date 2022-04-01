@@ -139,7 +139,10 @@ dmypy.json
 *.ini
 
 # data
-input
+open
 
 # tensorboard
 tensorboard
+
+# related work
+related_work
