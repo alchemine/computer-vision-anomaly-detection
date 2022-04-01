@@ -22,3 +22,14 @@ LEARNING_CURVE_N_SUBSETS_STEP = 5
 
 ### Model selection
 TEST_SIZE = 0.2
+
+
+### PATH
+from os.path import join, dirname
+class PATH:
+    root   = dirname(dirname(dirname('.')))
+    input  = join(root, 'open')
+    output = join(root, 'output')
+    result = join(root, 'result')
+    train  = join(input, 'train')
+    test   = join(input, 'test')
