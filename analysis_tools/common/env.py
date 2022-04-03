@@ -41,6 +41,11 @@ from parse import parse, search
 import missingno as msno
 
 
+## Image processing
+import cv2
+from PIL import Image
+
+
 ## Plot packages
 import matplotlib.pyplot as plt
 from matplotlib.cbook import boxplot_stats

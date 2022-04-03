@@ -24,10 +24,14 @@ LEARNING_CURVE_N_SUBSETS_STEP = 5
 TEST_SIZE = 0.2
 
 
+### Training
+BATCH_SIZE = 32
+
+
 ### PATH
-from os.path import join, dirname
+from os.path import join, dirname, abspath
 class PATH:
-    root   = dirname(dirname(dirname('.')))
+    root   = abspath(dirname(dirname(dirname('.'))))
     input  = join(root, 'open')
     output = join(root, 'output')
     result = join(root, 'result')
