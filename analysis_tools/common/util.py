@@ -11,15 +11,14 @@ from analysis_tools.common.env import *
 
 
 ### lambda functions
-tprint  = lambda dic: print(tabulate(dic, headers='keys', tablefmt='psql'))  # print with fancy 'psql' format
-ls_all  = lambda path: [path for path in glob(f"{path}/*")]
-ls_dir  = lambda path: [path for path in glob(f"{path}/*") if isdir(path)]
-ls_file = lambda path: [path for path in glob(f"{path}/*") if isfile(path)]
-
-mkdir   = lambda path: os.makedirs(path, exist_ok=True)
-rmdir   = lambda path: shutil.rmtree(path)
-
-figsize = lambda x, y: (int(x*FIGSIZE_UNIT), int(y*FIGSIZE_UNIT))
+tprint   = lambda dic: print(tabulate(dic, headers='keys', tablefmt='psql'))  # print with fancy 'psql' format
+ls_all   = lambda path: [path for path in glob(f"{path}/*")]
+ls_dir   = lambda path: [path for path in glob(f"{path}/*") if isdir(path)]
+ls_file  = lambda path: [path for path in glob(f"{path}/*") if isfile(path)]
+get_name = lambda path: split(path)[1]
+mkdir    = lambda path: os.makedirs(path, exist_ok=True)
+rmdir    = lambda path: shutil.rmtree(path)
+figsize  = lambda x, y: (int(x*FIGSIZE_UNIT), int(y*FIGSIZE_UNIT))
 
 
 @dataclass

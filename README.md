@@ -11,7 +11,7 @@ Macro f1 score
 
 
 # 2. Related work
-## 2.1 Baseline
+## 2.1 Baseline: `0.666`
 [baseline.ipynb](baseline.ipynb)
 
 1. Preprocessing
@@ -43,14 +43,19 @@ Macro f1 score
 
 
 # 3. Proposed idea
-## 3.1 Proposed 1
+## 3.1 Proposed 1: `0.614`
 [proposed1.ipynb](proposed1.ipynb)
 1. Early stopping 적용
 
 
-## 3.2 Proposed 2
+## 3.2 Proposed 2: `0.701`
 [proposed2.ipynb](proposed2.ipynb)
 1. TensorFlow porting
 2. Validation
    1. validation_on: optimal epochs 결정 -> **더 좋은 성능**
    2. validation_off: train_full로 학습
+
+
+## 3.3 Proposed 3: `0.745`
+[proposed3.ipynb](proposed3.ipynb)
+1. Sample weight 적용
