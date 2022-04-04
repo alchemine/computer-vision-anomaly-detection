@@ -59,3 +59,13 @@ Macro f1 score
 ## 3.3 Proposed 3: `0.745`
 [proposed3.ipynb](proposed3.ipynb)
 1. Sample weight 적용
+
+
+## 3.4 Proposed 4: `0.644`
+[proposed4.ipynb](proposed4.ipynb)
+1. Model: `efficientnet_b0`
+2. 2-level classification
+   1. Classification(`class`) \
+      `model1`: supervised
+   2. Classification(`label`) \
+      `model2`: supervised
