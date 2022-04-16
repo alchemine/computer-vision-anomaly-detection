@@ -10,8 +10,10 @@ from analysis_tools.common import *
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 from dtreeviz.trees import dtreeviz
-from tensorflow.keras.callbacks import Callback, EarlyStopping, TensorBoard
 from matplotlib.ticker import MaxNLocator
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras.callbacks import Callback, EarlyStopping, TensorBoard
 
 
 def get_scaling_model(model, scaler=StandardScaler()):
@@ -128,9 +130,39 @@ class LearningPlot(Callback):
         fig.savefig(f'{self.plot_path}.png')
         plt.close(fig)
 
+class LRScheduler(Callback):
+    def __init__(self, init_lr, epochs, warmup_epoch, min_lr, power):
+        self.init_lr  = init_lr
+        self.epochs   = epochs
+        self.warmup_epoch = warmup_epoch
+        self.min_lr   = min_lr
+        self.power    = power
+        self.decay_fn = keras.optimizers.schedules.PolynomialDecay(
+            initial_learning_rate=init_lr,
+            decay_steps=epochs - warmup_epoch,
+            end_learning_rate=min_lr,
+            power=power
+        )
+        self.lrs = []
+    def on_epoch_begin(self, epoch, logs=None):
+        global_epoch = tf.cast(epoch + 1, tf.float64)
+        warmup_epoch_float = tf.cast(self.warmup_epoch, tf.float64)
 
-def get_callbacks(patience, plot_path):
-    early_stopping = EarlyStopping(patience=patience, verbose=1)
-    tensorboard    = TensorBoard(join(PATH.root, 'tensorboard'))
-    learning_plot  = LearningPlot(plot_path)
-    return early_stopping, tensorboard, learning_plot
+        lr = tf.cond(
+            global_epoch < warmup_epoch_float,
+            lambda: self.init_lr * (global_epoch / warmup_epoch_float),
+            lambda: self.decay_fn(global_epoch - warmup_epoch_float),
+        )
+        tf.print('learning rate: ', lr)
+        keras.backend.set_value(self.model.optimizer.lr, lr)
+        self.lrs.append(lr)
+
+def get_callbacks(patience=10, plot_path=None, warmup_epoch=None, init_lr=2e-3, epochs=100, min_lr=1e-3, power=1):
+    callbacks = []
+    callbacks.append(EarlyStopping(patience=patience, verbose=1))
+    callbacks.append(TensorBoard(join(PATH.root, 'tensorboard')))
+    if plot_path:
+        callbacks.append(LearningPlot(plot_path))
+    if warmup_epoch:
+        callbacks.append(LRScheduler(init_lr, epochs, warmup_epoch, min_lr, power))
+    return callbacks

@@ -48,7 +48,7 @@ def confusion_matrix_analysis(y_true, y_pred, dir_path=None, figsize=FIGSIZE, sh
     >>> confusion_matrix_analysis(y_true, y_pred, dir_path='.')
     """
     normalized_C = confusion_matrix(y_true, y_pred, normalize='true')
-    assert all(normalized_C.sum(axis=1) == 1), "Confusion matrix is not normalized"
+    assert all(np.isclose(normalized_C.sum(axis=1), 1)), "Confusion matrix is not normalized"
 
     fig, axes = plt.subplots(2, 2, figsize=figsize)
     with FigProcessor(fig, dir_path, show_plot, "Confusion matrix"):
@@ -63,7 +63,7 @@ def confusion_matrix_analysis(y_true, y_pred, dir_path=None, figsize=FIGSIZE, sh
             ax.xaxis.tick_top()
     return dict(
         confusion_matrix=normalized_C,
-        accuracy=accuracy_score(y_true, y_pred), precision=precision_score(y_true, y_pred), recall=recall_score(y_true, y_pred), f1_score=f1_score(y_true, y_pred),
+        accuracy=accuracy_score(y_true, y_pred), precision=precision_score(y_true, y_pred, average='macro'), recall=recall_score(y_true, y_pred, average='macro'), f1_score=f1_score(y_true, y_pred, average='macro')
     )
 def curve_analysis(y_true, y_score,           dir_path=None, figsize=FIGSIZE, show_plot=SHOW_PLOT):
     """Plot Precision-Recall and ROC curves
