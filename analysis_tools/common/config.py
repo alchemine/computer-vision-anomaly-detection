@@ -31,7 +31,7 @@ BATCH_SIZE = 32
 ### PATH
 from os.path import join, dirname, abspath
 class PATH:
-    root   = abspath(dirname(dirname(dirname('.'))))
+    root   = abspath(dirname(dirname(dirname(__file__))))
     input  = join(root, 'open')
     output = join(root, 'output')
     result = join(root, 'result')

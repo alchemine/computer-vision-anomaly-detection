@@ -20,6 +20,31 @@ mkdir    = lambda path: os.makedirs(path, exist_ok=True)
 rmdir    = lambda path: shutil.rmtree(path)
 figsize  = lambda x, y: (int(x*FIGSIZE_UNIT), int(y*FIGSIZE_UNIT))
 
+def mv(src, dst):
+    """Move file.
+
+    Parameters
+    ----------
+    src : str
+        Source file path.
+    dst : str
+        Destination file path.
+    """
+    mkdir(dirname(dst))
+    shutil.move(src, dst)
+def cp(src, dst):
+    """Copy file.
+
+    Parameters
+    ----------
+    src : str
+        Source file path.
+    dst : str
+        Destination file path.
+    """
+    mkdir(dirname(dst))
+    shutil.copy(src, dst)
+
 
 @dataclass
 class Timer(ContextDecorator):
@@ -115,3 +140,15 @@ class FigProcessor(ContextDecorator):
         if self.show_plot:
             plt.show()
         plt.close(self.fig)
+
+
+def set_random_seed(seed):
+    """Set random seed.
+
+    Parameters
+    ----------
+    seed : int
+        Seed.
+    """
+    np.random.seed(seed)
+    random.seed(seed)

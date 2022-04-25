@@ -7,8 +7,7 @@ Performance evaluation metrics are defined here.
 
 
 from analysis_tools.common import *
-from sklearn.metrics import confusion_matrix, accuracy_score, f1_score, precision_score, recall_score, precision_recall_curve, average_precision_score, roc_curve, roc_auc_score
-from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.metrics import confusion_matrix, accuracy_score, f1_score, precision_score, recall_score, precision_recall_curve, average_precision_score, roc_curve, roc_auc_score, mean_squared_error, r2_score
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 from sklearn.inspection import permutation_importance
 from sklearn.preprocessing import OrdinalEncoder

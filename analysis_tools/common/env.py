@@ -26,6 +26,7 @@ from contextlib import ContextDecorator
 from dataclasses import dataclass
 from IPython.display import display, Markdown
 import subprocess
+import random
 
 
 ### External packages
@@ -51,6 +52,17 @@ import matplotlib.pyplot as plt
 from matplotlib.cbook import boxplot_stats
 from matplotlib.gridspec import GridSpec
 import seaborn as sns
+
+
+## Modeling
+try:
+    import tensorflow as tf
+    from tensorflow import keras
+    import tensorflow_addons as tfa
+    import tensorflow_probability as tfp
+    import torch
+except:
+    print("Check packages installed: tensorflow, tensorflow-addons, tensorflow-probability, torch")
 
 
 ## Matplotlib options
