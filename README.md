@@ -32,15 +32,6 @@ Macro f1 score
    1. Rank 1
    2. Unsupervised anomaly detection
 
-### 2.2.2 [Image Classification on ImageNet](https://paperswithcode.com/sota/image-classification-on-imagenet)
-1. [NoisyStudent](https://github.com/rwightman/pytorch-image-models/blob/9a25fdf3ad0414b4d66da443fe60ae0aa14edc84/timm/models/efficientnet.py#L1520) (Top 1 Accuracy: `88.4%`, Top 5 Accuracy: `98.7%`, Number of params: `480M`)
-   1. Rank 18
-   2. Easy to use pretrained model(`timm.create_model('tf_efficientnet_l2_ns', pretrained=True, num_classes=88)`) 
-
-2. [Meta Pseudo Labels](https://github.com/google-research/google-research/tree/master/meta_pseudo_labels) (Top 1 Accuracy: `90.2%`, Top 5 Accuracy: `98.8%`, Number of params: `480M`)
-   1. Rank 5
-   2. `timm.create_model('efficientnet_b0', pretrained=True, num_classes=88)` 
-
 
 # 3. Proposed idea
 ## 3.1 Proposed 1: `0.614`
@@ -69,3 +60,13 @@ Macro f1 score
       `model1`: supervised
    2. Classification(`label`) \
       `model2`: supervised
+
+## 3.5 Proposed 5:
+[proposed5.ipynb](proposed5.ipynb)
+1. 3-level classification
+   1. Classification(`class`) \
+      `model1`: supervised (`efficientnet_b0`)
+   2. Anomaly detection \
+      `model2`: unsupervised (`PatchCore`)
+   3. Classification(`label`) \
+      `model3`: supervised (`efficientnet_b0`)
